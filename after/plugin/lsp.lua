@@ -2,12 +2,12 @@ local lsp = require('lsp-zero').preset({})
 local cmp = require('cmp')
 local cmp_action = require('lsp-zero').cmp_action()
 
-
 lsp.on_attach(function(client, bufnr)
   -- see :help lsp-zero-keybindings
   -- to learn the available actions
   lsp.default_keymaps({buffer = bufnr})
 end)
+
 
 cmp.setup({
   mapping = {
