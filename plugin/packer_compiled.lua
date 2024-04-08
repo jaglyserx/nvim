@@ -49,8 +49,8 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "/Users/joelblomster/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?.lua;/Users/joelblomster/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?/init.lua;/Users/joelblomster/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?.lua;/Users/joelblomster/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/Users/joelblomster/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/lua/5.1/?.so"
+local package_path_str = "/Users/joelblomster/.cache/nvim/packer_hererocks/2.1.1703358377/share/lua/5.1/?.lua;/Users/joelblomster/.cache/nvim/packer_hererocks/2.1.1703358377/share/lua/5.1/?/init.lua;/Users/joelblomster/.cache/nvim/packer_hererocks/2.1.1703358377/lib/luarocks/rocks-5.1/?.lua;/Users/joelblomster/.cache/nvim/packer_hererocks/2.1.1703358377/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/Users/joelblomster/.cache/nvim/packer_hererocks/2.1.1703358377/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -83,6 +83,15 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/joelblomster/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
     url = "https://github.com/hrsh7th/cmp-nvim-lsp"
+  },
+  ["copilot.lua"] = {
+    commands = { "Copilot" },
+    config = { "\27LJ\2\n—\1\0\0\5\0\b\0\v6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\6\0005\3\3\0005\4\4\0=\4\5\3=\3\a\2B\0\2\1K\0\1\0\15suggestion\1\0\0\vkeymap\1\0\6\vaccept\n<C-j>\tnext\n<M-]>\16accept_word\1\fdismiss\n<C-]>\tprev\n<M-[>\16accept_line\1\1\0\3\fenabled\2\rdebounce\3K\17auto_trigger\2\nsetup\fcopilot\frequire\0" },
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/Users/joelblomster/.local/share/nvim/site/pack/packer/opt/copilot.lua",
+    url = "https://github.com/zbirenbaum/copilot.lua"
   },
   harpoon = {
     loaded = true,
@@ -157,6 +166,25 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+
+-- Command lazy-loads
+time([[Defining lazy-load commands]], true)
+pcall(vim.api.nvim_create_user_command, 'Copilot', function(cmdargs)
+          require('packer.load')({'copilot.lua'}, { cmd = 'Copilot', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
+        end,
+        {nargs = '*', range = true, bang = true, complete = function()
+          require('packer.load')({'copilot.lua'}, {}, _G.packer_plugins)
+          return vim.fn.getcompletion('Copilot ', 'cmdline')
+      end})
+time([[Defining lazy-load commands]], false)
+
+vim.cmd [[augroup packer_load_aucmds]]
+vim.cmd [[au!]]
+  -- Event lazy-loads
+time([[Defining lazy-load event autocommands]], true)
+vim.cmd [[au VimEnter * ++once lua require("packer.load")({'copilot.lua'}, { event = "VimEnter *" }, _G.packer_plugins)]]
+time([[Defining lazy-load event autocommands]], false)
+vim.cmd("augroup END")
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then
