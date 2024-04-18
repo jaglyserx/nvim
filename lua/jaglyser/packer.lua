@@ -15,6 +15,7 @@ return require('packer').startup(function(use)
 
     use('oxfist/night-owl.nvim')
 
+
     use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate'})
     use('nvim-treesitter/playground')
     use ('mbbill/undotree')
@@ -32,6 +33,7 @@ return require('packer').startup(function(use)
             {'L3MON4D3/LuaSnip'},     -- Required
         }
     }
+    require("mason").setup()
 
     use("christoomey/vim-tmux-navigator")
     --use("github/copilot.vim")
@@ -62,6 +64,8 @@ return require('packer').startup(function(use)
         branch = "harpoon2",
         requires = { {"nvim-lua/plenary.nvim"} }
     }
+    use "sindrets/diffview.nvim" 
+
 
 end)
 
