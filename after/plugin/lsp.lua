@@ -8,6 +8,7 @@ lsp.on_attach(function(client, bufnr)
   lsp.default_keymaps({buffer = bufnr})
 
   vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename)
+  vim.keymap.set('n', '<leader>fr', vim.lsp.buf.format)
 end)
 
 
