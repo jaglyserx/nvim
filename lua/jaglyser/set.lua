@@ -14,3 +14,10 @@ vim.opt.termguicolors = true
 vim.opt.scrolloff = 8
 
 vim.opt.updatetime = 50
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = {"typescript", "typescriptreact", "javascript", "javascriptreact"},
+
+	command = "setlocal shiftwidth=2 tabstop=2"
+})
+
