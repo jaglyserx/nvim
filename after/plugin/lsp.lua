@@ -36,5 +36,12 @@ require('mason-lspconfig').setup({
     },
 })
 
+require('lspconfig').clangd.setup {
+    cmd = {
+        "clangd",
+        "--fallback-style=webkit"
+    }
+}
+
 
 lsp.setup()
