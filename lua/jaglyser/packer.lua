@@ -24,20 +24,19 @@ return require('packer').startup(function(use)
     use { 'VonHeikemen/lsp-zero.nvim',
         requires = {
             -- LSP Support
-            { 'neovim/nvim-lspconfig' },           -- Required
-            { 'williamboman/mason.nvim' },         -- Optional
+            { 'neovim/nvim-lspconfig' },             -- Required
+            { 'williamboman/mason.nvim' },           -- Optional
             { 'williamboman/mason-lspconfig.nvim' }, -- Optional
 
             -- Autocompletion
-            { 'hrsh7th/nvim-cmp' },   -- Required
+            { 'hrsh7th/nvim-cmp' },     -- Required
             { 'hrsh7th/cmp-nvim-lsp' }, -- Required
-            { 'L3MON4D3/LuaSnip' },   -- Required
+            { 'L3MON4D3/LuaSnip' },     -- Required
         }
     }
     require("mason").setup()
 
     use("christoomey/vim-tmux-navigator")
-    --use("github/copilot.vim")
     use {
         "zbirenbaum/copilot.lua",
         cmd = "Copilot",
@@ -80,4 +79,5 @@ return require('packer').startup(function(use)
             require('render-markdown').setup({})
         end,
     })
+    use("lervag/vimtex")
 end)
