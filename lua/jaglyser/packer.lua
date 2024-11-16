@@ -80,4 +80,6 @@ return require('packer').startup(function(use)
         end,
     })
     use("lervag/vimtex")
+    use("NeogitOrg/neogit")
+    use("gilion-joel-b/UUID-Generator")
 end)
