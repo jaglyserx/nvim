@@ -82,21 +82,32 @@ return require('packer').startup(function(use)
     use("lervag/vimtex")
     use("NeogitOrg/neogit")
     use("gilion-joel-b/UUID-Generator")
-    --use {
-    --    "yetone/avante.nvim",
-    --    requires = {
-    --        "stevearc/dressing.nvim",
-    --        "nvim-lua/plenary.nvim",
-    --        "MunifTanjim/nui.nvim",
-    --        --- The below dependencies are optional,
-    --        "echasnovski/mini.pick",         -- for file_selector provider mini.pick
-    --        "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
-    --        "hrsh7th/nvim-cmp",              -- autocompletion for avante commands and mentions
-    --        "ibhagwan/fzf-lua",              -- for file_selector provider fzf
-    --        "nvim-tree/nvim-web-devicons",   -- or echasnovski/mini.icons
-    --        "zbirenbaum/copilot.lua",        -- for providers='copilot'
-    --        "HakonHarnes/img-clip.nvim",
-    --        'MeanderingProgrammer/render-markdown.nvim',
-    --    }
-    --}
+    use {
+        'yetone/avante.nvim',
+        branch = 'main',
+        run = 'make', -- This builds the necessary binaries (or run `make BUILD_FROM_SOURCE=true` if needed)
+        config = function()
+            -- This line is crucial for loading required templates and tokenizers:
+            require('avante_lib').load()
+            -- Now set up the plugin; you can pass your custom options here
+            require('avante').setup({
+                claude = {
+                    endpoint = "https://api.anthropic.com",
+                    model = "claude-3-5-sonnet-20241022",
+                    temperature = 0,
+                    max_tokens = 4096,
+                },
+                -- add additional configuration options as needed
+            })
+        end,
+        requires = {
+            'stevearc/dressing.nvim',
+            'nvim-lua/plenary.nvim',
+            'MunifTanjim/nui.nvim',
+            'MeanderingProgrammer/render-markdown.nvim',
+            'hrsh7th/nvim-cmp',            -- optional: for command autocompletion
+            'HakonHarnes/img-clip.nvim',   -- optional: for image pasting support
+            'zbirenbaum/copilot.lua'       -- optional: for Copilot integration
+        },
+    }
 end)
