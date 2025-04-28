@@ -93,7 +93,7 @@ return require('packer').startup(function(use)
             require('avante').setup({
                 claude = {
                     endpoint = "https://api.anthropic.com",
-                    model = "claude-3-5-sonnet-20241022",
+                    model = "claude-3-7-sonnet-20250219",
                     temperature = 0,
                     max_tokens = 4096,
                 },

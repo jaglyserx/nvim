@@ -31,6 +31,16 @@ require('mason-lspconfig').setup({
     ensure_installed = { 'ts_ls', 'rust_analyzer' },
     handlers = {
         function(server_name)
+            if server_name == "clangd" then
+                require('lspconfig')[server_name].setup {
+                    cmd = {
+                        "clangd",
+                        "--fallback-style=webkit"
+                    },
+                    filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "hpp", "h" },
+                }
+                return
+            end
             require('lspconfig')[server_name].setup({})
         end,
     },
@@ -40,7 +50,8 @@ require('lspconfig').clangd.setup {
     cmd = {
         "clangd",
         "--fallback-style=webkit"
-    }
+    },
+    filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "hpp", "h" },
 }
 
 
