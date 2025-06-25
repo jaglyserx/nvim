@@ -91,12 +91,16 @@ return require('packer').startup(function(use)
             require('avante_lib').load()
             -- Now set up the plugin; you can pass your custom options here
             require('avante').setup({
-                claude = {
-                    endpoint = "https://api.anthropic.com",
-                    model = "claude-3-7-sonnet-20250219",
-                    temperature = 0,
-                    max_tokens = 4096,
-                },
+                providers = {
+                    claude = {
+                        endpoint = "https://api.anthropic.com",
+                        model = "claude-sonnet-4-20250514",
+                        extra_request_body = {
+                            temperature = 0,
+                            max_tokens = 20480,
+                        }
+                    },
+                }
                 -- add additional configuration options as needed
             })
         end,
@@ -105,9 +109,9 @@ return require('packer').startup(function(use)
             'nvim-lua/plenary.nvim',
             'MunifTanjim/nui.nvim',
             'MeanderingProgrammer/render-markdown.nvim',
-            'hrsh7th/nvim-cmp',            -- optional: for command autocompletion
-            'HakonHarnes/img-clip.nvim',   -- optional: for image pasting support
-            'zbirenbaum/copilot.lua'       -- optional: for Copilot integration
+            'hrsh7th/nvim-cmp',          -- optional: for command autocompletion
+            'HakonHarnes/img-clip.nvim', -- optional: for image pasting support
+            'zbirenbaum/copilot.lua'     -- optional: for Copilot integration
         },
     }
 end)
