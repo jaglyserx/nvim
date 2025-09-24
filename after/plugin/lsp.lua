@@ -7,7 +7,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
         vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
         vim.keymap.set("n", "<leader>fr", vim.lsp.buf.format, bufopts)
-        vim.keymap.set("n", "ca", vim.lsp.code_action, bufopts)
+        vim.keymap.set("n", "gca", vim.lsp.buf.code_action, bufopts)
         vim.keymap.set("n", "gl", vim.diagnostic.open_float, bufopts)
     end,
 })
