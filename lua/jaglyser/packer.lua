@@ -80,38 +80,10 @@ return require('packer').startup(function(use)
         end,
     })
     use("lervag/vimtex")
-    use("NeogitOrg/neogit")
     use("gilion-joel-b/UUID-Generator")
-    use {
-        'yetone/avante.nvim',
-        branch = 'main',
-        run = 'make', -- This builds the necessary binaries (or run `make BUILD_FROM_SOURCE=true` if needed)
-        config = function()
-            -- This line is crucial for loading required templates and tokenizers:
-            require('avante_lib').load()
-            -- Now set up the plugin; you can pass your custom options here
-            require('avante').setup({
-                providers = {
-                    claude = {
-                        endpoint = "https://api.anthropic.com",
-                        model = "claude-sonnet-4-20250514",
-                        extra_request_body = {
-                            temperature = 0,
-                            max_tokens = 20480,
-                        }
-                    },
-                }
-                -- add additional configuration options as needed
-            })
-        end,
-        requires = {
-            'stevearc/dressing.nvim',
-            'nvim-lua/plenary.nvim',
-            'MunifTanjim/nui.nvim',
-            'MeanderingProgrammer/render-markdown.nvim',
-            'hrsh7th/nvim-cmp',          -- optional: for command autocompletion
-            'HakonHarnes/img-clip.nvim', -- optional: for image pasting support
-            'zbirenbaum/copilot.lua'     -- optional: for Copilot integration
-        },
-    }
+    --use {
+    --    "nvim-neorg/neorg",
+    --    rocks = { "lua-utils.nvim", "nvim-nio", "nui.nvim", "plenary.nvim", "pathlib.nvim", "nvim-treesitter-legacy-api" },
+    --    tag = "*",
+    --}
 end)
