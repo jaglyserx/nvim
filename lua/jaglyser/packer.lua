@@ -86,4 +86,5 @@ return require('packer').startup(function(use)
     --    rocks = { "lua-utils.nvim", "nvim-nio", "nui.nvim", "plenary.nvim", "pathlib.nvim", "nvim-treesitter-legacy-api" },
     --    tag = "*",
     --}
+    use("folke/snacks.nvim")
 end)
