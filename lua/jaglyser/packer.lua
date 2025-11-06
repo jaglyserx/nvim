@@ -61,4 +61,11 @@ return require('packer').startup(function(use)
     use("lervag/vimtex")
     use("gilion-joel-b/UUID-Generator")
     use("folke/snacks.nvim")
+    use {
+        "ThePrimeagen/refactoring.nvim",
+        requires = {
+            { "nvim-lua/plenary.nvim" },
+            { "nvim-treesitter/nvim-treesitter" }
+        }
+    }
 end)
