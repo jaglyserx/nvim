@@ -13,7 +13,7 @@ vim.keymap.set("n", "<leader>y", "\"+y")
 vim.keymap.set("v", "<leader>y", "\"+y")
 vim.keymap.set("n", "<leader>Y", "\"+Y")
 
+vim.keymap.set("n", "<localleader>yp", function() vim.fn.setreg('+', vim.fn.expand('%:p:.')) end)
 vim.g.copilot_no_tab_map = true
 
 vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
-
