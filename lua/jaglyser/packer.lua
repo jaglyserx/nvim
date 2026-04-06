@@ -6,12 +6,12 @@ vim.cmd [[packadd packer.nvim]]
 return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
     use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.8',
+        'nvim-telescope/telescope.nvim',
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
     use('oxfist/night-owl.nvim')
     use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
-    use('nvim-treesitter/playground')
+    -- use('nvim-treesitter/playground')
     use('mbbill/undotree')
     use('hrsh7th/nvim-cmp')
     use('hrsh7th/cmp-nvim-lsp')
@@ -50,22 +50,22 @@ return require('packer').startup(function(use)
     use "sindrets/diffview.nvim"
     use "stevearc/oil.nvim"
     use "tpope/vim-fugitive"
-    use({
-        'MeanderingProgrammer/render-markdown.nvim',
-        after = { 'nvim-treesitter' },
-        requires = { 'echasnovski/mini.nvim', opt = true }, -- if you use the mini.nvim suite
-        config = function()
-            require('render-markdown').setup({})
-        end,
-    })
+    --use({
+    --    'MeanderingProgrammer/render-markdown.nvim',
+    --    after = { 'nvim-treesitter' },
+    --    requires = { 'echasnovski/mini.nvim', opt = true }, -- if you use the mini.nvim suite
+    --    config = function()
+    --        require('render-markdown').setup({})
+    --    end,
+    --})
     use("lervag/vimtex")
     use("gilion-joel-b/UUID-Generator")
     use("folke/snacks.nvim")
-    use {
-        "ThePrimeagen/refactoring.nvim",
-        requires = {
-            { "nvim-lua/plenary.nvim" },
-            { "nvim-treesitter/nvim-treesitter" }
-        }
-    }
+    --use {
+    --    "ThePrimeagen/refactoring.nvim",
+    --    requires = {
+    --        { "nvim-lua/plenary.nvim" },
+    --        { "nvim-treesitter/nvim-treesitter" }
+    --    }
+    --}
 end)
