@@ -10,7 +10,7 @@ return require('packer').startup(function(use)
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
     use('oxfist/night-owl.nvim')
-    use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
+    use('nvim-treesitter/nvim-treesitter', { branch = "main", run = ':TSUpdate' })
     -- use('nvim-treesitter/playground')
     use('mbbill/undotree')
     use('hrsh7th/nvim-cmp')
