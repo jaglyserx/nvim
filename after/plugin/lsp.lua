@@ -1,4 +1,7 @@
-local cmp = require('cmp')
+local ok, cmp = pcall(require, 'cmp')
+if not ok then
+    return
+end
 
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("UserLspConfig", {}),

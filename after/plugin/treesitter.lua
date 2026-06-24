@@ -1,31 +1,44 @@
-require('nvim-treesitter').setup {
-    branch = "main",
-    highlight = {
-        enable = true,
-        --  additional_vim_regex_highlighting = false,
-    },
+local ok, treesitter = pcall(require, 'nvim-treesitter')
+if not ok then
+    return
+end
+
+treesitter.setup {
+    install_dir = vim.fn.stdpath('data') .. '/site',
 }
 
-require('nvim-treesitter').install { 'rust', 'javascript', 'zig', 'python', 'lua', 'lua' }
+treesitter.install { 'rust', 'javascript', 'zig', 'python', 'lua' }
+
+local start_treesitter = function(buf, filetype)
+    if not filetype or filetype == "" then
+        return
+    end
+
+    if vim.bo[buf].buftype ~= "" then
+        return
+    end
+
+    local language = vim.treesitter.language.get_lang(filetype)
+    if not language then
+        return
+    end
+
+    local added_ok, added = pcall(vim.treesitter.language.add, language)
+    if not added_ok or added == false then
+        return
+    end
+
+    if not pcall(vim.treesitter.start, buf, language) then
+        return
+    end
+
+    vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+end
 
 vim.api.nvim_create_autocmd('FileType', {
     callback = function(args)
-        local buf, filetype = args.buf, args.match
-
-        local language = vim.treesitter.language.get_lang(filetype)
-        if not language then
-            return
-        end
-
-        -- check if parser exists and load it
-        if not vim.treesitter.language.add(language) then
-            return
-        end
-
-        -- enables syntax highlighting and other treesitter features
-        vim.treesitter.start(buf, language)
-
-        -- enables treesitter based indentation
-        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        start_treesitter(args.buf, args.match)
     end,
 })
+
+start_treesitter(vim.api.nvim_get_current_buf(), vim.bo.filetype)
