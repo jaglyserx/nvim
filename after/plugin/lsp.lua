@@ -1,4 +1,8 @@
-local cmp = require('cmp')
+local plugin = require("jaglyser.plugin")
+local cmp = plugin.require('cmp', 'nvim-cmp')
+if not cmp then
+    return
+end
 
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("UserLspConfig", {}),
@@ -18,7 +22,8 @@ vim.diagnostic.config({
 })
 
 
-cmp.setup({
+if not plugin.safe_setup("nvim-cmp", function()
+    cmp.setup({
     mapping = {
         ['<Enter>'] = cmp.mapping.confirm({ select = true }),
         ['<Tab>'] = cmp.mapping.select_next_item(),
@@ -29,7 +34,10 @@ cmp.setup({
     }, {
         { name = 'buffer' },
     })
-})
+    })
+end) then
+    return
+end
 
 
 --

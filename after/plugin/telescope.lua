@@ -1,4 +1,8 @@
-local builtin = require('telescope.builtin')
+local plugin = require("jaglyser.plugin")
+local builtin = plugin.require('telescope.builtin', 'telescope.nvim')
+if not builtin then
+    return
+end
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
