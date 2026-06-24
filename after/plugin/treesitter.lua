@@ -1,11 +1,16 @@
-local ok, treesitter = pcall(require, 'nvim-treesitter')
-if not ok then
+local plugin = require("jaglyser.plugin")
+local treesitter = plugin.require('nvim-treesitter', 'nvim-treesitter')
+if not treesitter then
     return
 end
 
-treesitter.setup {
+if not plugin.safe_setup("nvim-treesitter", function()
+    treesitter.setup {
     install_dir = vim.fn.stdpath('data') .. '/site',
-}
+    }
+end) then
+    return
+end
 
 treesitter.install { 'rust', 'javascript', 'zig', 'python', 'lua' }
 

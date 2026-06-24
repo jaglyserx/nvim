@@ -1,10 +1,15 @@
-local ok, harpoon = pcall(require, "harpoon")
-if not ok then
+local plugin = require("jaglyser.plugin")
+local harpoon = plugin.require("harpoon", "harpoon")
+if not harpoon then
     return
 end
 
 -- REQUIRED
-harpoon:setup()
+if not plugin.safe_setup("harpoon", function()
+    harpoon:setup()
+end) then
+    return
+end
 -- REQUIRED
 
 vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)

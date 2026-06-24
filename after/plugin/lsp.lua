@@ -1,5 +1,6 @@
-local ok, cmp = pcall(require, 'cmp')
-if not ok then
+local plugin = require("jaglyser.plugin")
+local cmp = plugin.require('cmp', 'nvim-cmp')
+if not cmp then
     return
 end
 
@@ -21,7 +22,8 @@ vim.diagnostic.config({
 })
 
 
-cmp.setup({
+if not plugin.safe_setup("nvim-cmp", function()
+    cmp.setup({
     mapping = {
         ['<Enter>'] = cmp.mapping.confirm({ select = true }),
         ['<Tab>'] = cmp.mapping.select_next_item(),
@@ -32,7 +34,10 @@ cmp.setup({
     }, {
         { name = 'buffer' },
     })
-})
+    })
+end) then
+    return
+end
 
 
 --
