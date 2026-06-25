@@ -10,6 +10,9 @@ end
 
 codediff_nightowl()
 
+vim.keymap.set("n", "<leader>cdd", "<CMD>CodeDiff<CR>", { desc = "CodeDiff" })
+vim.keymap.set("n", "<leader>cdm", "<CMD>CodeDiff main...<CR>", { desc = "CodeDiff main" })
+
 vim.api.nvim_create_autocmd("ColorScheme", {
     pattern = "night-owl",
     callback = codediff_nightowl,
