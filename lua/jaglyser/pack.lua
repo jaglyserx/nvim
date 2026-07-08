@@ -33,6 +33,7 @@ vim.pack.add({
     gh("mbbill/undotree"),
     gh("hrsh7th/nvim-cmp"),
     gh("hrsh7th/cmp-nvim-lsp"),
+    gh("mfussenegger/nvim-jdtls"),
     gh("williamboman/mason.nvim"),
     gh("williamboman/mason-lspconfig.nvim"),
     gh("christoomey/vim-tmux-navigator"),
