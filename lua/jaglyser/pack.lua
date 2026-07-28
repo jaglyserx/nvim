@@ -34,6 +34,7 @@ vim.pack.add({
     gh("hrsh7th/nvim-cmp"),
     gh("hrsh7th/cmp-nvim-lsp"),
     gh("mfussenegger/nvim-jdtls"),
+    gh("mfussenegger/nvim-dap"),
     gh("williamboman/mason.nvim"),
     gh("williamboman/mason-lspconfig.nvim"),
     gh("christoomey/vim-tmux-navigator"),
