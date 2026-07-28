@@ -21,6 +21,29 @@ end
 
 local project_name = vim.fn.fnamemodify(root_dir, ":p:h:t")
 local workspace_dir = vim.fn.stdpath("cache") .. "/jdtls/workspace/" .. project_name
+local java_debug_bundles = vim.fn.glob(
+    vim.fn.stdpath("data")
+        .. "/mason/packages/java-debug-adapter/extension/server/"
+        .. "com.microsoft.java.debug.plugin-*.jar",
+    false,
+    true
+)
+local java_test_bundles = vim.fn.glob(
+    vim.fn.stdpath("data") .. "/java-test-0.43.1/extension/server/*.jar",
+    false,
+    true
+)
+local excluded_test_bundles = {
+    ["com.microsoft.java.test.runner-jar-with-dependencies.jar"] = true,
+    ["jacocoagent.jar"] = true,
+}
+
+for _, bundle in ipairs(java_test_bundles) do
+    local filename = vim.fn.fnamemodify(bundle, ":t")
+    if not excluded_test_bundles[filename] then
+        table.insert(java_debug_bundles, bundle)
+    end
+end
 
 local config = {
     name = "jdtls",
@@ -34,13 +57,24 @@ local config = {
         java = {},
     },
     init_options = {
-        bundles = {},
+        bundles = java_debug_bundles,
     },
 }
 
 jdtls.start_or_attach(config)
+jdtls.setup_dap({ hotcodereplace = "auto" })
 
 local opts = { buffer = true, silent = true }
+vim.keymap.set("n", "<leader>jt", jdtls.test_nearest_method, {
+    buffer = true,
+    silent = true,
+    desc = "Java: Debug nearest test",
+})
+vim.keymap.set("n", "<leader>jT", jdtls.test_class, {
+    buffer = true,
+    silent = true,
+    desc = "Java: Debug test class",
+})
 vim.keymap.set("n", "<leader>jo", jdtls.organize_imports, opts)
 vim.keymap.set("n", "<leader>jv", jdtls.extract_variable, opts)
 vim.keymap.set("v", "<leader>jv", function()
