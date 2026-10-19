@@ -15,8 +15,13 @@ vim.opt.termguicolors = true
 vim.opt.scrolloff = 8
 vim.opt.updatetime = 50
 
---vim.api.nvim_create_autocmd("FileType", {
---    pattern = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
---
---    command = "setlocal shiftwidth=2 tabstop=2"
---})
+vim.api.nvim_create_autocmd("FileType", {
+    group = vim.api.nvim_create_augroup("TypeScriptIndent", { clear = true }),
+    pattern = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+    callback = function()
+        vim.opt_local.tabstop = 2
+        vim.opt_local.softtabstop = 2
+        vim.opt_local.shiftwidth = 2
+        vim.opt_local.expandtab = true
+    end,
+})
