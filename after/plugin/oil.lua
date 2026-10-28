@@ -9,7 +9,10 @@ if not plugin.safe_setup("oil.nvim", function()
         view_options = {
             -- Show files and directories that start with "."
             show_hidden = true,
-        }
+        },
+        keymaps = {
+            ["<C-h>"] = false,
+        },
     })
 end) then
     return
