@@ -12,6 +12,7 @@ if not plugin.safe_setup("oil.nvim", function()
         },
         keymaps = {
             ["<C-h>"] = false,
+            ["<C-l>"] = false,
         },
     })
 end) then
